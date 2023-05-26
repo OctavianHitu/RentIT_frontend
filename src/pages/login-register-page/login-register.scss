@@ -1,0 +1,67 @@
+@import "../../assets/sass/global/variables.scss";
+.login-register-page {
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(
+    to right,
+    $green-l 0%,
+    $green-l 40%,
+    $white 40%,
+    $white 100%
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .login-register {
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+      rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+      rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+    height: 80%;
+    width: 80%;
+    display: grid;
+    grid-template-columns: 37.5% 62.5%;
+    .logo-zone {
+      display: flex;
+      flex-direction: column;
+      gap: 5%;
+      justify-content: center;
+      align-items: center;
+
+      font-weight: 700;
+      font-size: 50px;
+      font-family: Tahoma;
+      color: $powder;
+
+      .it-part {
+        color: $yellow;
+      }
+      .rde {
+        font-size: 25px;
+      }
+    }
+    .log-reg-form-zone {
+      display: grid;
+      grid-template-rows: 92% 8%;
+
+      .forms{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar-log{
+        display:grid;
+        grid-template-columns: 50% 50%;
+
+      
+        .navbar-btn{
+          border: none;
+          background-color: transparent;
+        }
+
+      }
+
+    }
+  }
+}

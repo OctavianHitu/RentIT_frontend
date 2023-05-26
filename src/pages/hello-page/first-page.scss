@@ -1,0 +1,118 @@
+@import "../../assets/sass/global/variables.scss";
+
+.entry-page{
+  
+    height:100%;
+    background: $white;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    &::-webkit-scrollbar {
+       display: none;
+    }
+    .row1{
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 5%;
+     background-color: #21A0A0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 100 60'%3E%3Cg %3E%3Crect fill='%2321A0A0' width='11' height='11'/%3E%3Crect fill='%23219f9f' x='10' width='11' height='11'/%3E%3Crect fill='%23209e9e' y='10' width='11' height='11'/%3E%3Crect fill='%23209d9d' x='20' width='11' height='11'/%3E%3Crect fill='%231f9c9c' x='10' y='10' width='11' height='11'/%3E%3Crect fill='%231f9b9b' y='20' width='11' height='11'/%3E%3Crect fill='%231e9a9a' x='30' width='11' height='11'/%3E%3Crect fill='%231e9999' x='20' y='10' width='11' height='11'/%3E%3Crect fill='%231d9898' x='10' y='20' width='11' height='11'/%3E%3Crect fill='%231d9797' y='30' width='11' height='11'/%3E%3Crect fill='%231c9696' x='40' width='11' height='11'/%3E%3Crect fill='%231c9595' x='30' y='10' width='11' height='11'/%3E%3Crect fill='%231c9493' x='20' y='20' width='11' height='11'/%3E%3Crect fill='%231b9392' x='10' y='30' width='11' height='11'/%3E%3Crect fill='%231b9291' y='40' width='11' height='11'/%3E%3Crect fill='%231a9190' x='50' width='11' height='11'/%3E%3Crect fill='%231a908f' x='40' y='10' width='11' height='11'/%3E%3Crect fill='%23198f8e' x='30' y='20' width='11' height='11'/%3E%3Crect fill='%23198e8d' x='20' y='30' width='11' height='11'/%3E%3Crect fill='%23188e8c' x='10' y='40' width='11' height='11'/%3E%3Crect fill='%23188d8b' y='50' width='11' height='11'/%3E%3Crect fill='%23178c8a' x='60' width='11' height='11'/%3E%3Crect fill='%23178b89' x='50' y='10' width='11' height='11'/%3E%3Crect fill='%23168a88' x='40' y='20' width='11' height='11'/%3E%3Crect fill='%23168987' x='30' y='30' width='11' height='11'/%3E%3Crect fill='%23158886' x='20' y='40' width='11' height='11'/%3E%3Crect fill='%23158785' x='10' y='50' width='11' height='11'/%3E%3Crect fill='%23148684' x='70' width='11' height='11'/%3E%3Crect fill='%23148583' x='60' y='10' width='11' height='11'/%3E%3Crect fill='%23148482' x='50' y='20' width='11' height='11'/%3E%3Crect fill='%23138381' x='40' y='30' width='11' height='11'/%3E%3Crect fill='%23138280' x='30' y='40' width='11' height='11'/%3E%3Crect fill='%2312817f' x='20' y='50' width='11' height='11'/%3E%3Crect fill='%2312807e' x='80' width='11' height='11'/%3E%3Crect fill='%23117f7d' x='70' y='10' width='11' height='11'/%3E%3Crect fill='%23117e7c' x='60' y='20' width='11' height='11'/%3E%3Crect fill='%23107d7b' x='50' y='30' width='11' height='11'/%3E%3Crect fill='%23107c7a' x='40' y='40' width='11' height='11'/%3E%3Crect fill='%230f7b79' x='30' y='50' width='11' height='11'/%3E%3Crect fill='%230e7b78' x='90' width='11' height='11'/%3E%3Crect fill='%230e7a77' x='80' y='10' width='11' height='11'/%3E%3Crect fill='%230d7976' x='70' y='20' width='11' height='11'/%3E%3Crect fill='%230d7875' x='60' y='30' width='11' height='11'/%3E%3Crect fill='%230c7774' x='50' y='40' width='11' height='11'/%3E%3Crect fill='%230c7673' x='40' y='50' width='11' height='11'/%3E%3Crect fill='%230b7572' x='90' y='10' width='11' height='11'/%3E%3Crect fill='%230b7471' x='80' y='20' width='11' height='11'/%3E%3Crect fill='%230a7370' x='70' y='30' width='11' height='11'/%3E%3Crect fill='%230a726f' x='60' y='40' width='11' height='11'/%3E%3Crect fill='%2309716f' x='50' y='50' width='11' height='11'/%3E%3Crect fill='%2308706e' x='90' y='20' width='11' height='11'/%3E%3Crect fill='%23086f6d' x='80' y='30' width='11' height='11'/%3E%3Crect fill='%23076e6c' x='70' y='40' width='11' height='11'/%3E%3Crect fill='%23076d6b' x='60' y='50' width='11' height='11'/%3E%3Crect fill='%23066d6a' x='90' y='30' width='11' height='11'/%3E%3Crect fill='%23066c69' x='80' y='40' width='11' height='11'/%3E%3Crect fill='%23056b68' x='70' y='50' width='11' height='11'/%3E%3Crect fill='%23056a67' x='90' y='40' width='11' height='11'/%3E%3Crect fill='%23046966' x='80' y='50' width='11' height='11'/%3E%3Crect fill='%23046865' x='90' y='50' width='11' height='11'/%3E%3C/g%3E%3C/svg%3E");
+      background-attachment: fixed;
+      background-size: cover;
+    
+      .welcome{
+      text-align: center;
+      color: $white;
+
+      
+    
+    }
+    .welcome-1{
+      text-align: center;
+      font-size: 250;
+      overflow: hidden;
+      line-height: 1;
+      font-family: Tahoma;
+      height: fit-content;
+      width: fit-content;
+        color: $white;
+
+      .w-best{
+        font-size: 90px;
+        font-weight: 600;
+        display: block;
+        animation: reveal 1.5s cubic-bezier(0.77, 0, 0.175, 1) 0s;
+      }
+    
+    }
+    }
+
+
+
+    .row2{
+      background-color: $white;
+      height: 50%;
+      display: grid;
+      grid-template-columns: 45% 10% 45%;
+      border-bottom: 2px solid #000;
+
+      .quote{
+        margin: 15%;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: Tahoma;
+        font-size: 40px;
+        color:$white;
+        box-shadow: 30px 50px 50px #5e5d5d;
+
+        
+      }
+      .q1{
+        background-color: $orange;
+
+      }
+
+      .q2{
+        background-color: $green-p;
+
+      }
+      .sign{
+        display: flex;
+        justify-content: center;
+        align-items: end;
+      }
+
+
+    }
+
+    .row3{
+      height: 80%;
+    }
+    .aboutUs{
+      height:30%;
+      background-color: $green-p;
+      display: flex;
+      justify-content: center;
+      gap: 10%;
+      align-items: center;
+      .contact{
+        color: white;
+        :nth-child(1){
+          padding-bottom: 20px;
+        }
+      }
+    }
+
+}
+
+
+@keyframes reveal {
+  0% {
+    transform: translate(0,100%);
+  }
+  100% {
+    transform: translate(0,0);
+  }}

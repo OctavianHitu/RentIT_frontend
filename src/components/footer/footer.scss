@@ -1,0 +1,14 @@
+@import '../../assets/sass/global/variables.scss';
+.footer {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  background-color: $green-p;
+
+    
+  .rentit-logo-footer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}

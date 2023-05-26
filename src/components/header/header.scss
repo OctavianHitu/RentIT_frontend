@@ -1,0 +1,85 @@
+@import '../../assets/sass/global/variables.scss';
+.header{
+    height: 100%;
+    display:grid;
+    grid-template-columns: 45% 10% 45%;
+    align-items: center;
+    position: sticky;
+    top:0;
+    z-index: 999;  
+    background: rgba(255, 255, 255, 0.1);
+    padding-left: 15px;
+    padding-right: 15px;
+    border-bottom: 3px solid $green-l;
+
+    .btns-hd{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        gap:5%;
+        .hd-btn{
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+    }
+    
+
+    .logo{
+    background-color: $green-l;
+    border-radius: 10px;
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+    }
+
+    .user-zone{
+        display:flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        gap:2%;
+        height: 100%;
+        .toLoginOrRegister{
+            height: 70%;
+            width:25%;
+            background-color: $yellow; 
+            border: none; 
+            border-radius: 5px;
+            color: $black;
+            font-weight: 700;
+            font-family: Tahoma;
+
+        }
+
+    }
+    .user-buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        gap: 2%;
+
+        .icon-part{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background:none;
+            border: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+            cursor: pointer;
+
+        }
+    }
+    
+}

@@ -1,0 +1,80 @@
+@import '../../assets/sass/global/variables.scss';
+
+.all-acc{
+    height: 100%;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+         &::-webkit-scrollbar {
+            display: none;
+         }
+.accoutPage{
+    height:150%;
+    display: grid;
+    grid-template-rows: 5% 95%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+         &::-webkit-scrollbar {
+            display: none;
+         }
+
+    .miniHeader{
+        background-color: $green-l;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        font-size: 20px;
+        font-family: 'Courier New', Courier, monospace;
+        position: sticky;
+        top: 0;
+        z-index: 999;
+    }
+
+    .page-zone{
+    height: 100%;
+    background-color: white;
+    display:  grid;
+    grid-template-columns: 18% 82%;
+    .chooser{
+        display: flex;
+        flex-direction: column;
+        gap: 4%;
+        height: 60%;
+        border-right: 3px solid $green-l;
+        width: 100%;
+        padding-top: 10%;
+        align-items: center;
+        
+        .line-part{
+            width: 80%;
+            display: flex;
+            gap: 5%;
+            justify-content: flex-start;
+            align-items: center;
+            background:none;
+            border: none;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: 600;
+            font-size: 17px;
+        }
+        .line-part:focus{
+            border-bottom: 2px solid $green-l;
+        }
+    }
+    .info{
+        height: 100%;
+        width: 100%;
+    }
+    
+}
+
+    
+}
+
+.foot{
+    height:30%;
+}
+}
+    
