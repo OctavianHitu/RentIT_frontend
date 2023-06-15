@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import "./register-form.scss";
 import { UserType } from "../../assets/sass/global/Usertype";
 import { Alert } from "@mui/material";

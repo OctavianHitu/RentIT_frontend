@@ -1,0 +1,26 @@
+@import '../../assets/sass/global/variables.scss';
+.Mycars-page{
+    overflow-y: scroll;
+    .MyCars-table{
+        height: 100%;
+        display: flex;
+        justify-content: center;
+
+        .table-mycars-comp{
+            margin-top: 3rem;
+            width: 80%;
+        .headerTable-MyCars{
+            background-color: $green-l;
+        }
+
+        .tableRow-mycars{
+
+        }
+    }
+
+    }
+    .footer-mycars{
+        height: 30%;
+    }
+
+}

@@ -23,6 +23,9 @@ export interface Car{
     carFeatures:CarFeatures;
     owner:string;
     _id:string;
+    city:string,
+    country:string,
+    address:string
 }
 export interface CarDetails{
     carType:CarBody;
@@ -51,7 +54,7 @@ export interface CarFeatures{
     headlights:Headlights;
 }
 
-export const CarContext= createContext<CarType>({
+export const CarContext= createContext<any>({
     cars:[],
     setCars:()=>{},
 });
@@ -69,7 +72,7 @@ export const CarProvider =(props:any)=>{
       }, []);
 
       return(
-        <CarContext.Provider value={{cars,setCars}}>
+        <CarContext.Provider value={{cars,setCars,getCars}}>
             {props.children}
         </CarContext.Provider>
       )

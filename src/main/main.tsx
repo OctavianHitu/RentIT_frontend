@@ -12,14 +12,21 @@ import ManagerPage from "../pages/managerPage/managerPage";
 import CarPage from "../pages/CarInsertestPage/CarPage";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import Footer from "../components/footer/footer";
 import OffersPage from "../pages/Offers/offers";
 import FullModalCar from "../components/FullCarModal/FullCarModal";
 import SellerPage from "../pages/SellerPage/sellerPage";
+import { ReservationProvideer } from "../context/reservationContext";
+import TermsPage from "../pages/sup.term/terms";
+import ContactUsPage from "../pages/support/contactus";
+import MyCars from "../pages/mycars/Mycars";
+import { FavouritesProvider } from "../context/favouriteContext";
+import FavouritePage from "../pages/favPage/favPage";
 const Main =()=>{
     return(
         <div className="main">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <FavouritesProvider>
+                <ReservationProvideer>
             <LoginProvider>
             <CarProvider>
             <UserProvider>
@@ -61,10 +68,25 @@ const Main =()=>{
                 path="/sellerPage/:id"
                 element={<SellerPage/>}
                 />
+                <Route
+                path="/infoPage"
+                element={<TermsPage/>}
+                />
+                <Route
+                path="/contactUs"
+                element={<ContactUsPage/>}/>
+                <Route
+                path="/MyCars"
+                element={<MyCars/>}/>
+                <Route
+                path="/favourites"
+                element={<FavouritePage/>}/>
             </Routes>
             </UserProvider>
             </CarProvider>
             </LoginProvider>
+            </ReservationProvideer>
+            </FavouritesProvider>
             </LocalizationProvider>
         </div>
     )

@@ -2,7 +2,7 @@
 .footer {
   height: 100%;
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 45% 10% 45%;
   background-color: $green-p;
 
     
@@ -10,5 +10,20 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+  }
+  .footer-selectror{
+    display: flex;
+    gap:1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+
+    .btn-footer{
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      color: white;
+    }
+    
   }
 }

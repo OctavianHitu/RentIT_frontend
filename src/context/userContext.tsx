@@ -41,6 +41,7 @@ export const UserProvider =(props:any)=>{
     async function getUsers(){
         const {data} =await getAxiosInstance().get("/user");
         const userList =data;
+        
         setUsers(userList);
     }
     

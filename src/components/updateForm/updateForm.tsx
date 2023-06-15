@@ -1,10 +1,10 @@
 import { Button, Dialog, DialogActions, DialogTitle, TextField } from "@mui/material";
 import { useContext, useState } from "react";
 import './updateForm.scss'
-import { UserContext } from "../../context/userContext";
 import { LoginContext } from "../../context/loginContext";
 import getAxiosInstance from "../../axios-service";
 import { UserType } from "../../assets/sass/global/Usertype";
+import { User, UserContext } from "../../context/userContext";
 
 const UpdateForm: React.FC=(): JSX.Element =>{
 
@@ -12,12 +12,15 @@ const UpdateForm: React.FC=(): JSX.Element =>{
     const emailregex = RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
     const {user}= useContext(LoginContext);
-
+    const {users,getUsers}=useContext(UserContext);
+    const usr:User= users.find((e:User)=>{
+        return e._id===user?.id
+    })
     const [all,setAll]=useState({
-        phoneNumber:'',
-        avatar:"",
-        email:"",
-        description:""
+        phoneNumber:usr.phoneNumber,
+        avatar:usr.avatar,
+        email:usr.email,
+        description:usr.description
     })
     const [alertPh,setAlertPh] =useState(false);
     const [emailAlert,setEmailAlert] =useState(false);
@@ -40,30 +43,35 @@ const UpdateForm: React.FC=(): JSX.Element =>{
     }; 
 
     function Submit(){
+        
 
 
-        if(all.phoneNumber===''&&user?.phoneNumber){
-            all.phoneNumber=user?.phoneNumber;
-            setAll(all);
+        if(alertPh===true){
+            if(user?.phoneNumber){
+            setAll({...all,phoneNumber:user.phoneNumber})
+            }
         }
 
         if(all.avatar===""&&user?.avatar){
-            all.avatar=user?.avatar;
-            setAll(all);
+            setAll({...all,avatar:user.avatar})
+
         }
-        if(all.email===""&&user?.email){
-            all.email=user?.email;
-            setAll(all);
+        if(emailAlert===true){
+            if(user?.email){
+                setAll({...all,email:user.email})
+
+            }
+            
         }
         if(all.description===""&&user?.description){
-            all.description=user?.description;
-            setAll(all);
+            setAll({...all,description:user.description})
+
         }
 
 
         getAxiosInstance()
-        .put("/user/" + user?.id, JSON.stringify(all))
-
+        .put("/user/" + user?.id, JSON.stringify(all)).then(()=>{getUsers()})
+        console.log(all);
 
         setDialog(false);
 
@@ -89,13 +97,18 @@ const UpdateForm: React.FC=(): JSX.Element =>{
                     Telephone:
                 {alertPh?(<div className='inc'>Incorrect!</div>):null}
                 </div>
-                <TextField id="outlined-basic" onChange={(e:any)=>{
-                if(phoneRegex.test(e.target.value))
+                <TextField placeholder={usr.phoneNumber} id="outlined-basic" onChange={(e:any)=>{
+                if(phoneRegex.test(e.target.value)===true)
                 {
-                    all.phoneNumber=e.target.value;
-                    setAll(all);
+                    setAll({...all,phoneNumber:e.target.value});
                     setAlertPh(false);
+                    if(e.target.value===""){
+                        setAlertPh(false);
+                    }
                 }else{
+                    if(e.target.value===""){
+                        setAlertPh(false);
+                    }
                     setAlertPh(true);
                 }
                 
@@ -107,10 +120,9 @@ const UpdateForm: React.FC=(): JSX.Element =>{
                 {emailAlert?(<div className='inc'>Incorrect!</div>):null}
                
                 </div>
-                 <TextField   variant="outlined"onChange={(e:any)=>{
-                    if(emailregex.test(e.target.value)){
-                        all.email=e.target.value;
-                        setAll(all);
+                 <TextField placeholder={usr.email}  variant="outlined"onChange={(e:any)=>{
+                    if(emailregex.test(e.target.value)===true){
+                        setAll({...all,email:e.target.value});
                         setEmailAlert(false);
                         if(e.target.value===""){
                             setEmailAlert(false);
@@ -122,8 +134,6 @@ const UpdateForm: React.FC=(): JSX.Element =>{
                         }
                         setEmailAlert(true);
                     }
-                all.email=e.target.value;
-                setAll(all);
             }} />
             </div>
             {user?.userType===UserType.DEALERSHIP?(
@@ -136,8 +146,7 @@ const UpdateForm: React.FC=(): JSX.Element =>{
           multiline
           rows={6}
           onChange={(e)=>{
-            all.description=e.target.value;
-            setAll(all);
+            setAll({...all,description:e.target.value});
           }}
           
         />

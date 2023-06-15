@@ -3,7 +3,7 @@ import Rentit from '../rentit/rentit';
 import './header.scss'
 import { useContext, useEffect, useState } from 'react';
 import { LoginContext } from '../../context/loginContext';
-import { jsonFromJwt } from '../../assets/sass/global/user_decoded';
+import { decodeUserJwt, jsonFromJwt } from '../../assets/sass/global/user_decoded';
 import Person2OutlinedIcon from '@mui/icons-material/Person2Outlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
@@ -12,6 +12,8 @@ import ControlPointRoundedIcon from '@mui/icons-material/ControlPointRounded';
 import { Avatar } from '@mui/material';
 import CarRentalIcon from '@mui/icons-material/CarRental';
 import HomeIcon from '@mui/icons-material/Home';
+import { CarContext } from '../../context/carContext';
+import TimeToLeaveRoundedIcon from '@mui/icons-material/TimeToLeaveRounded';
 interface HeaderComponent{}
 
 const Header: React.FC<HeaderComponent> = (): JSX.Element => {
@@ -19,6 +21,7 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
     const { user } = useContext(LoginContext);
     let [isLogged, setIsLogged] = useState(false);
     const navigate = useNavigate();
+    const {getCars}=useContext(CarContext)
     
 
     useEffect(() => {
@@ -33,9 +36,12 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
         navigate("/account")
       }
       function handleLogout(){
+            
+          
+
         sessionStorage.clear();
-        setIsLogged(false);
         navigate("/welcome")
+        setIsLogged(false);
       }
 
       function carPageListener(){
@@ -45,29 +51,45 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
     <div className="header">
         {user?.userType===UserType.MANAGER?(<div></div>):(
             <div className='btns-hd' >
-            <button className='hd-btn'onClick={()=>{
-                console.log(user)
+
+
+
+
+{user?.userType===UserType.REGULAR||isLogged===false?(
+    <button className='hd-btn'onClick={()=>{
         navigate("/welcome")
 
         }}>
+            
             <HomeIcon/>
                 Home
             </button>
+                
+):null}
+            
+
+
+
             <button className='hd-btn' onClick={()=>{
             navigate("/offers")
-
+                getCars();
         }} >
             <CarRentalIcon/>
-            Offers
+           All Offers
 
             </button>
-            {user?.isVerified===true?(            
+            {user?.isVerified===true&&isLogged&&user.userType===UserType.DEALERSHIP?(            
             <button className='hd-btn' onClick={carPageListener}>
                 <ControlPointRoundedIcon/>
                  New car
             </button>) 
              :null}
-
+             {user?.isVerified===true&&isLogged&&user.userType===UserType.DEALERSHIP?(            
+            <button className='hd-btn' onClick={()=>{navigate('MyCars')}} >
+                <TimeToLeaveRoundedIcon/>
+                 My Cars
+            </button>) 
+             :null}
         </div>
         )}
         
@@ -77,8 +99,8 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
         {isLogged?(
             <div className='user-buttons'>
                 {user?.userType===UserType.MANAGER?
-                (<Avatar alt="M" />):(
-                    <Avatar src={user?.avatar} /> 
+                (<Avatar alt="Manager Manager" />):(
+                    <Avatar  src={user?.avatar} /> 
                 )}
                 {user?.userType===UserType.MANAGER?null:(
                     <button className='icon-part' onClick={accountButton}>
@@ -86,8 +108,8 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
                     Account
                 </button>
                 )}
-                {user?.userType===UserType.MANAGER?null:(
-                    <button className='icon-part'>
+                {user?.userType!=UserType.REGULAR?null:(
+                    <button onClick={()=>{navigate('/favourites')}} className='icon-part'>
                     <FavoriteBorderOutlinedIcon/>
                     Favourites
                 </button> 

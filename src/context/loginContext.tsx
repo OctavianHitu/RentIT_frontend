@@ -1,5 +1,4 @@
 import { ReactNode, createContext, useEffect, useState } from "react";
-import { User } from "./userContext";
 import { decodeUserJwt } from "../assets/sass/global/user_decoded";
 import { UserType } from "../assets/sass/global/Usertype";
 

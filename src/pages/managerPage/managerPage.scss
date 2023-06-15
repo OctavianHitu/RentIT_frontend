@@ -1,11 +1,31 @@
+@import '../../assets/sass/global/variables.scss';
 .managerPage{
     height: 100%;
     width: 100%;
-    display: flex;
-    justify-content: center;
-    .tableMan{
-        margin-top: 3%;
-        height: 100%;
-        width:95%;
+    display: grid;
+    grid-template-rows: 5% 95% ;
+    .selections-for-manager{
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        background-color: $green-l;
+
+        .btn-for-manager-sel{
+            border: none;
+            background-color: transparent;
+            cursor: pointer;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
     }
+    .tableMan{
+        padding-top: 2% ;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    
+
 }

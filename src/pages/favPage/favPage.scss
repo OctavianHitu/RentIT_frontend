@@ -1,0 +1,27 @@
+@import '../../assets/sass/global/variables.scss';
+.fav-Page{
+    overflow-y: scroll;
+    .fav-page-cont{
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .fav-badge{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 2.7rem;
+            background-color: $green-l;
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 600;
+            color: $white;
+
+
+        }
+    }
+    .fav-footer-pg{
+        height: 30%;
+    }
+}

@@ -1,5 +1,5 @@
 export enum UserType {
-    REGULAR="regular",
-    DEALERSHIP="dealership",
-    MANAGER="manager"
+    REGULAR="Regular",
+    DEALERSHIP="Dealership",
+    MANAGER="Manager"
   }

@@ -5,7 +5,6 @@ import PasswordOutlinedIcon from "@mui/icons-material/PasswordOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { useState } from "react";
 import CompleteForm from "../../components/completeForm/completeForm";
-import Rentit from "../../components/rentit/rentit";
 import UpdateForm from "../../components/updateForm/updateForm";
 import PasswordForm from "../../components/rdForm/passForm";
 import Footer from "../../components/footer/footer";

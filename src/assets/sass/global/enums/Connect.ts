@@ -1,8 +1,8 @@
- export enum Connections{
-    bluetooth="bluetooth",
-    appleCarPlay="appleCarPlay",
-    androidAuto="androidAuto",
-    aux="aux",
-    none="none"
+export enum Connections{
+    Bluetooth="Bluetooth",
+    AppleCarPlay="AppleCarPlay",
+    AndroidAuto="AndroidAuto",
+    Aux="Aux",
+    None="None"
     
 }

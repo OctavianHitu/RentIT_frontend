@@ -14,7 +14,6 @@ import {
   Switch,
   TextField,
 } from "@mui/material";
-import { Buttons } from "@testing-library/user-event/dist/types/system/pointer/buttons";
 import { carList } from "../../assets/sass/global/enums/Cars";
 import DriveFolderUploadIcon from "@mui/icons-material/DriveFolderUpload";
 import { LoginContext } from "../../context/loginContext";
@@ -27,6 +26,7 @@ import { Connections } from "../../assets/sass/global/enums/Connect";
 import { Headlights } from "../../assets/sass/global/enums/Headlights";
 import getAxiosInstance from "../../axios-service";
 import Footer from "../../components/footer/footer";
+import { Car, CarContext } from "../../context/carContext";
 const CarPage: React.FC = (): JSX.Element => {
   const priceRegex = RegExp(/^[0-9]*$/);
 
@@ -40,6 +40,9 @@ const CarPage: React.FC = (): JSX.Element => {
   const [engine, setEngine] = useState(false);
 
   const { user } = useContext(LoginContext);
+  const {cars}=useContext(CarContext)
+
+  const [exists,setExists]=useState(false);
 
   const [car, setCar] = useState({
     serialNumber: "",
@@ -75,9 +78,12 @@ const CarPage: React.FC = (): JSX.Element => {
       headlights: "",
     },
     owner: user?.id,
+    city:user?.city,
+    country:user?.country,
+    address:user?.address
   });
 
-  const cars = carList.sort(function (a, b) {
+  const carsL = carList.sort(function (a, b) {
     if (a.brand < b.brand) {
       return -1;
     }
@@ -86,6 +92,7 @@ const CarPage: React.FC = (): JSX.Element => {
     }
     return 0;
   });
+  console.log(car)
 
   const convertBase64 = (file: File) => {
     return new Promise((resolve, reject) => {
@@ -118,21 +125,43 @@ const CarPage: React.FC = (): JSX.Element => {
 
   const format: MuiColorInputFormat = "hex";
 
+  const [succes,setSucces]=useState(false);
 
  async function handlesubmitCar(){
+
+  
+  const isFound = cars.some((element:Car) => {
     
-     getAxiosInstance()
-    .post("car", JSON.stringify(car))
-    .then(() => {
-    });
+    if (element.serialNumber === car.serialNumber) {
+      return true;
+    
+    }
+  });
+    if(isFound){
+      setExists(true);
+    }else{
+      getAxiosInstance()
+      .post("car", JSON.stringify(car))
+      .then(() => {
+        setSucces(true);
+      });
+    }
+    
+    
 
 }
-const [succes,setSucces]=useState(false);
 const handleClose=(e:any,reason?:string)=>{
     if(reason==='clickaway'){
         return
     }
     setSucces(false);
+}
+
+const handleClose1=(e:any,reason?:string)=>{
+  if(reason==='clickaway'){
+      return
+  }
+  setExists(false);
 }
 
   return (
@@ -153,7 +182,7 @@ const handleClose=(e:any,reason?:string)=>{
                     setCar({ ...car, brand: elem.target.value });
                   }}
                 >
-                  {cars.map((e: any) => {
+                  {carsL.map((e: any) => {
                     return (
                       <MenuItem value={e.brand} key={e.brand}>
                         {e.brand}
@@ -174,7 +203,7 @@ const handleClose=(e:any,reason?:string)=>{
                     setCar({ ...car, model: elem.target.value });
                   }}
                 >
-                  {cars.map((e: any) => {
+                  {carsL.map((e: any) => {
                     if (e.brand === car.brand) {
                       return e.models.map((n: any) => {
                         return (
@@ -806,6 +835,23 @@ const handleClose=(e:any,reason?:string)=>{
     Car added succesfully!
   </Alert>
             </Snackbar>
+
+            {exists ? (
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={exists}
+          onClose={handleClose1}
+          autoHideDuration={4000}
+        >
+          <Alert
+            onClose={handleClose1}
+            severity="error"
+            sx={{ width: "500px" }}
+          >
+            The win inserted is already in our database!
+          </Alert>
+        </Snackbar>
+      ) : null}
       </div>
       <div className="ffot">
         <Footer/>

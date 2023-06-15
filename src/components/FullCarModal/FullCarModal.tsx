@@ -1,26 +1,27 @@
-import { useContext, useMemo, useState } from "react";
-import { Car, CarContext } from "../../context/carContext";
+import { useContext, useEffect, useMemo, useState } from "react";
+import {  CarContext } from "../../context/carContext";
 import "./FullCarModal.scss";
 import DoneIcon from '@mui/icons-material/Done';
 import HighlightOffIcon from '@mui/icons-material/HighlightOff';
 import { UserContext } from "../../context/userContext";
-import { Avatar, Button, Rating } from "@mui/material";
+import { Avatar, Rating } from "@mui/material";
 import { User } from "../../context/userContext";
 import MapPicker from "react-google-map-picker";
 import { LoginContext } from "../../context/loginContext";
 import { UserType } from "../../assets/sass/global/Usertype";
 import { useNavigate } from "react-router-dom";
-// interface FullCarModalComponent{
-//     car:Car;
-// }
+import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+
 
 const FullModalCar: React.FC = (): JSX.Element => {
   var id = window.location.href.substring(
     window.location.href.lastIndexOf("/") + 1
   );
+  const [idState,setIdState]=useState(id)
+
   const { cars } = useContext(CarContext);
-  const car = cars.find((elem) => {
-    return elem._id === id;
+  const car = cars.find((elem:any) => {
+    return elem._id === idState;
   });
 
   const {users,setUsers}=useContext(UserContext);
@@ -29,13 +30,24 @@ const FullModalCar: React.FC = (): JSX.Element => {
     return elem._id===car?.owner
   })
   const {user}=useContext(LoginContext)
-  console.log(user)
 
   const navigate = useNavigate();
 
   function goToSeller(){
     navigate(`/sellerPage/${userOfCar._id}`)
   }
+
+  console.log(car)
+  console.log(userOfCar)
+  
+  let valuesForMap={lat:12,lng:24}
+  if(userOfCar){
+     valuesForMap={lat:userOfCar.lat,lng:userOfCar.lang}
+  }
+
+
+  
+
 
   return (
     <div className="modal-fullcar">
@@ -113,11 +125,15 @@ const FullModalCar: React.FC = (): JSX.Element => {
                 <div className="moda-details-list">
                 <div className="modal-details-line">
                     <span>Car type:</span>
-                    {car?.carDetails.carType}
+                    {car?.carDetails.carType.toUpperCase()}
                 </div>
                 <div className="modal-details-line">
                 <span>Fabrication:</span>
+                {car?.carDetails.fabricationYear.toString()?(
 
+                new Date(car?.carDetails.fabricationYear).toLocaleDateString().toString()
+                ):null}
+                  
                 </div>
                 <div className="modal-details-line">
                 <span>Doors:</span>
@@ -131,7 +147,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
                 </div>
                 <div className="modal-details-line">
                 <span>Fuel:</span>
-                {car?.carDetails.fuel}
+                {car?.carDetails.fuel.toUpperCase()}
 
                 </div>
                 <div className="modal-details-line">
@@ -154,7 +170,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
                 </div>
                 <div className="modal-details-line">
                 <span>Traction:</span>
-                {car?.carDetails.traction}
+                {car?.carDetails.traction.toUpperCase()}
                 </div>
                 <div className="modal-details-line">
                 <span>Power:</span>
@@ -180,7 +196,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
                 <div className="moda-details-list">
                 <div className="modal-details-line">
                     <span>Connectivity:</span>
-                    {car?.carFeatures.connectivity}
+                    {car?.carFeatures.connectivity.toUpperCase()}
                 </div>
                 <div className="modal-details-line">
                 <span>Heated seats:</span>
@@ -249,7 +265,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
                 </div>
                 <div className="modal-details-line">
                 <span>Headlights:</span>
-                {car?.carFeatures.headlights}
+                {car?.carFeatures.headlights.toUpperCase()}
                 </div>
                 
 
@@ -263,11 +279,16 @@ const FullModalCar: React.FC = (): JSX.Element => {
 
       <div className="car-modal-row-3">
         <div className="car-modal-map">
-        <MapPicker
-        defaultLocation={{lat:userOfCar.lat,lng:userOfCar.lang}}
+          {userOfCar?(
+            <MapPicker
+        defaultLocation={valuesForMap}
         apiKey='AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8'
         zoom={18}/>
+          ):null}
 
+
+
+            
         </div>
 
       </div>

@@ -15,6 +15,7 @@ import getAxiosInstance from '../../axios-service';
 
 export interface TableComponent{
     userList:any;
+    isUserNormal:Boolean;
 
 }
 
@@ -41,16 +42,29 @@ const TableComponent =(props:TableComponent):JSX.Element=>{
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow className="headerTable">
+            {props.isUserNormal?(
             <TableCell align="center">First Name</TableCell>
+              
+            ):null}
+            {props.isUserNormal?(
             <TableCell align="center">Last Name</TableCell>  
+              
+              ):null}
+              {!props.isUserNormal?(
             <TableCell align="center">Company Name</TableCell>
+              
+              ):null}
             <TableCell align="center">User Type</TableCell>
             <TableCell align="center">Email</TableCell>
             <TableCell align="center">Country</TableCell>
             <TableCell align="center">City</TableCell>
             <TableCell align="center">address</TableCell>
-            <TableCell align="center">License</TableCell>
+            <TableCell align="center">License</TableCell>  
+
+            {props.isUserNormal?(
             <TableCell align='center'>Verified</TableCell>
+              
+              ):null}
             <TableCell align="center"></TableCell>
 
           </TableRow>
@@ -61,18 +75,29 @@ const TableComponent =(props:TableComponent):JSX.Element=>{
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row" align="center">
+              {props.isUserNormal?(
+                <TableCell component="th" scope="row" align="center">
                 {row.firstName}
               </TableCell>
+              ):null}
+              {props.isUserNormal?(
               <TableCell align="center">{row.lastName}</TableCell>
+                
+                ):null}
+                {!props.isUserNormal?(
               <TableCell align="center">{row.companyName}</TableCell>
+                
+                ):null}
+              
               <TableCell align="center">{row.userType}</TableCell>
               <TableCell align="center">{row.email}</TableCell>
               <TableCell align="center">{row.country}</TableCell>
               <TableCell align="center">{row.city}</TableCell>
               <TableCell align="center">{row.address}</TableCell>
               <TableCell align="center">{String(row.isVerified)}</TableCell>
-              <TableCell align="center">
+
+              {props.isUserNormal?(
+                <TableCell align="center">
               <Button
                 onClick={()=>{
                     setLicense(row.license);
@@ -80,6 +105,8 @@ const TableComponent =(props:TableComponent):JSX.Element=>{
                     }}
                 >License</Button>
               </TableCell>
+              ):null}
+              
 
               <TableCell align="center">
                 {row.isVerified?(
@@ -112,9 +139,9 @@ const TableComponent =(props:TableComponent):JSX.Element=>{
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
                 >
-                    <Box sx={style}>
+                    <Box  sx={style}>
 
-                <img src={license}/>
+                <img style={{maxHeight:'600px',maxWidth:'600px'}} className='image-modal-verif-manager' src={license}/>
 
                 </Box>
                 </Modal>

@@ -9,7 +9,7 @@
     padding: 1%;
     border-radius: 10px;
     box-shadow: 0px 10px 20px 5px rgba(0, 0, 0, 0.5);
-margin: 20px;
+    margin: 20px;
     background-color: white;
 
     .carPhoto{
@@ -55,6 +55,11 @@ margin: 20px;
                 justify-content: flex-end;
                 align-items: end;
                 gap: 5%;
+                .fav-btn-car-card{
+                    border: none;
+                    background-color: transparent;
+                }
+                
 
                 .btn-offer-full{
                     background-color: $green-p;
