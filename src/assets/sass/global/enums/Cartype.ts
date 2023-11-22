@@ -5,5 +5,7 @@ export enum CarBody{
     Sport="Sport",
     Hatchback="Hatchback",
     Mini="Mini",
-    Convertable="Convertable"
+    Convertable="Convertable",
+    Van="Van"
+
 }

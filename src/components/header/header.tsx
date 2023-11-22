@@ -40,7 +40,7 @@ const Header: React.FC<HeaderComponent> = (): JSX.Element => {
           
 
         sessionStorage.clear();
-        navigate("/welcome")
+        navigate("/loginRegister")
         setIsLogged(false);
       }
 

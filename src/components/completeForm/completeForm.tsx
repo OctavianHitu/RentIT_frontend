@@ -9,9 +9,11 @@ import getAxiosInstance from "../../axios-service";
 import { UserType } from "../../assets/sass/global/Usertype";
 import { citiesRomania } from "../../assets/sass/global/enums/orase";
 import { carList } from "../../assets/sass/global/enums/Cars";
+import { UserContext } from "../../context/userContext";
 
 const CompleteForm: React.FC = (): JSX.Element => {
   const { user } = useContext(LoginContext);
+  const {getUsers}=useContext(UserContext);
 
 
   const phoneRegex = RegExp(
@@ -28,17 +30,12 @@ const CompleteForm: React.FC = (): JSX.Element => {
     city: "",
     zipcode: "",
     license: "",
-    lang: "",
-    lat: "",
+    lang: 0,
+    lat: 0,
   });
 
 
 
-  function handleChangeLocation(lat: any, lng: any) {
-    all.lang = lng;
-    all.lat = lat;
-    setAll(all);
-  }
 
   const [submit, setSubmit] = useState(false);
   const [succes, setSucces] = useState(false);
@@ -56,6 +53,7 @@ const CompleteForm: React.FC = (): JSX.Element => {
         getAxiosInstance()
           .put("/user/" + user?.id, JSON.stringify(all))
           .then(() => {
+            getUsers();
             setSucces(true);
           });
       } else {
@@ -144,15 +142,30 @@ const CompleteForm: React.FC = (): JSX.Element => {
         </div>
         <div className="line">
           Country:
-          <TextField
+          {user?.userType===UserType.DEALERSHIP?(
+            <TextField
             id="outlined-basic"
             variant="outlined"
             placeholder="Romania"
             disabled
           />
+          ):(
+
+            <TextField
+            id="outlined-basic"
+            variant="outlined"
+            value={all.country}
+                  onChange={(elem: any) => {
+                    setAll({ ...all, country: elem.target.value });
+                  }}
+          />
+          )}
+          
         </div>
         <div className="line">
           City:
+          {user?.userType===UserType.DEALERSHIP?(
+
           <FormControl fullWidth>
                 <Select
                   labelId="demo-simple-select-label"
@@ -170,7 +183,17 @@ const CompleteForm: React.FC = (): JSX.Element => {
                     );
                   })}
                 </Select>
-              </FormControl>
+              </FormControl>):
+              (
+                <TextField
+            id="outlined-basic"
+            variant="outlined"
+            value={all.city}
+                  onChange={(elem: any) => {
+                    setAll({ ...all, city: elem.target.value });
+                  }}
+          />
+              )}
         </div>
         <div className="line">
           Address:
@@ -226,18 +249,7 @@ const CompleteForm: React.FC = (): JSX.Element => {
 
       {user?.userType === UserType.DEALERSHIP ? (
         <div className="map-pick">
-          <div>
-            Pick your location on map to be more accurate for the client!
-          </div>
-          <div className="map-container-12">
-          <MapPicker
-            defaultLocation={{ lat: 46, lng: 23 }}
-            zoom={5}
-            style={{ height: "500px", width: "800px" }}
-            onChangeLocation={handleChangeLocation}
-            apiKey="AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8"
-          />
-        </div>
+          
         </div>
       ) : null}
 </div>

@@ -20,41 +20,64 @@ const TermsPage:React.FC =():JSX.Element=>{
                     By accessing or using the Website, you acknowledge that you have read, understood, and agree to be bound by these Terms. If you do not agree with these Terms, you must not use the Website.
 
                     </div>
+                    
                     <div className='small-title-terms'>
-                    User Accounts
-
+Client Account
+                        
                     </div>
                     <div>
-                    a. User Registration: In order to use certain features of the Website, you must create a user account by providing accurate and complete information. You are responsible for maintaining the confidentiality of your account information and are liable for all activities that occur under your account.
-
+1. User Conduct: Users agree to use the Website and its services in compliance with all applicable laws and regulations. Users must not engage in any activities that are illegal, harmful, or violate the rights of others.
+                        
                     </div>
                     <div>
-                    b. License Verification: Users must provide a valid driver's license for verification purposes. RentIT reserves the right to approve or reject a user account based on its own discretion.
+2. As a client user of RentIT, you understand and agree that in order to ensure the safety and security of the platform, you will be required to upload a copy of your valid driving license for verification purposes.                      
+                    </div>
+                    <div>
+                    3.RentIT respects your privacy and is committed to protecting your personal information. Any information provided during the verification process, including your driving license, will be handled with utmost confidentiality. Your personal information will not be used for any purpose other than the verification process itself.
+                    </div>
+                    <div>
+                        4.Uploading your driving license for verification is a security feature implemented by RentIT to ensure the authenticity of user accounts and enhance trust among our users. This verification process helps maintain a secure environment for all RentIT users.
+                    </div>
 
+                    <div>
+                        5.RentIT adheres to strict data protection policies and complies with applicable privacy laws. Your personal information will be stored securely and handled in accordance with our Privacy Policy. We will not disclose or share your information with any third parties without your consent, except as required by law.
+                    </div>
+                    <div>
+                        6.RentIT will review the uploaded driving license to verify its authenticity and validate your identity. This process may take a reasonable amount of time, and RentIT reserves the right to approve or reject user accounts based on its own discretion.
+                    </div>
+                    <div>
+                        7.By uploading your driving license for verification, you acknowledge and agree that you are the lawful owner of the provided license and that the information you provide is true and accurate to the best of your knowledge.
                     </div>
                     <div className='small-title-terms'>
-User Responsibilities
+Dealer account
                         
                     </div>
                     <div>
-a. User Conduct: Users agree to use the Website and its services in compliance with all applicable laws and regulations. Users must not engage in any activities that are illegal, harmful, or violate the rights of others.
-                        
+                      1.As a dealer user of RentIT, you understand and agree that in order to ensure the legitimacy and credibility of listings on the platform, you will be required to send the necessary company papers via email for verification purposes. These documents may include company registration documents, licenses, permits, or any other relevant paperwork.
                     </div>
                     <div>
-b. Accuracy of Information: Users are responsible for providing accurate and up-to-date information on their user profile, including personal details, contact information, and driver's license details. RentIT is not responsible for any inaccuracies or false information provided by users.
-                        
-                    </div>
-                    <div className='small-title-terms'>
-Dealers' Responsibilities
-                        
+                      2. RentIT values the confidentiality of your information and is committed to protecting your personal and business data. Any information provided during the verification process, including your company papers, will be handled with utmost confidentiality. Your personal and business information will not be used for any purpose other than the verification process itself.
                     </div>
                     <div>
-a. Dealer Verification: Dealers must provide valid company information and relevant documents for verification purposes. RentIT reserves the right to approve or reject a dealer account based on its own discretion.
-                        
+                      3.Sending your company papers for verification via email is a security feature implemented by RentIT to ensure the authenticity and legitimacy of dealer accounts and listings. This verification process helps maintain a secure and trustworthy environment for all RentIT users.
                     </div>
                     <div>
-b. Vehicle Listings: Dealers are responsible for ensuring the accuracy and completeness of the vehicle listings posted on the Website. RentIT does not verify the accuracy of the listings and is not responsible for any discrepancies or misrepresentations made by dealers.
-                        
+                      4.RentIT follows strict data protection policies and complies with applicable privacy laws. Your personal and business information will be stored securely and handled in accordance with our Privacy Policy. We will not disclose or share your information with any third parties without your consent, except as required by law.
+                    </div>
+                    <div>
+                      5.RentIT will review the company papers sent via email to verify the authenticity and legitimacy of the dealership. This process may take a reasonable amount of time, and RentIT reserves the right to approve or reject dealer accounts and listings based on its own discretion.
+                    </div>
+                    <div>
+                      6.Once a dealer creates an offer for a car listing, they will be required to send the car papers via email for verification. RentIT will review the car papers to ensure the accuracy and legitimacy of the vehicle information. If the car papers meet the necessary requirements, the car listing will be approved and listed on the website.
+                    </div>
+                    <div>
+                      7.Dealers are responsible for providing accurate and truthful information during the verification process. Any false or misleading information may result in the rejection or suspension of the dealer account or car listing.
+                    </div>
+                    <div>
+                      8.By sending the necessary company papers and car papers for verification, you acknowledge and agree that you are the authorized representative of the dealership and that the information provided is true and accurate to the best of your knowledge.
+                    </div>
+                    <div>
+                      9.RentIT shall not be held liable for any damages, losses, or claims arising from the verification process or the use of the provided documents. RentIT is not responsible for any misuse or unauthorized access to your personal or business information resulting from factors beyond our control.
                     </div>
                     <div className='small-title-terms'>
 Booking and Reservations

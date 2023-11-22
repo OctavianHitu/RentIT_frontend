@@ -1,0 +1,59 @@
+@import '../../assets/sass/global/variables.scss';
+.supportP{
+    overflow-y: scroll;
+
+    .supportP-page{
+        height: 70%;
+        display: flex;
+        flex-direction: column;
+            align-items: center;
+            gap:1rem;
+
+            .sup-title{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 40px;
+                gap:1rem;
+                padding: 3rem;
+
+                .rnt-it-sup{
+                    background-color: $green-l;
+                    padding: 0rem 1rem 0rem 1rem;
+                    border-radius: 10px;
+                }
+            }
+
+            .asist-text{
+                width:42%;
+            }
+            .writing-sup{
+                width: 42%;
+                display: flex;
+                flex-direction: column;
+                gap:2rem;
+
+                .btn-sup-sub{
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .btn-sup-sub-st{
+                        cursor: pointer;
+                        border: none;
+                        background-color:$orange;
+                        color:$white;
+                        height: 3rem;
+                        width: 10rem;
+                        font-size: 25px;
+                        font-weight: 500;
+                        border-radius:10px ;
+                    }
+                }
+            }
+    }
+
+    .footer-supportP{
+        height:30%
+
+    }
+}

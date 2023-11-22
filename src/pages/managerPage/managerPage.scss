@@ -1,14 +1,21 @@
 @import '../../assets/sass/global/variables.scss';
 .managerPage{
-    height: 100%;
-    width: 100%;
-    display: grid;
-    grid-template-rows: 5% 95% ;
+    
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+        display: none;
+      }
+    display: flex;
+    flex-direction: column;
     .selections-for-manager{
+        width: 100%;
         display: flex;
         justify-content: space-around;
         align-items: center;
-        background-color: $green-l;
+        background-color: $green-l; 
+        position: fixed;
+        z-index: 800;
+        padding: 0.5rem 0rem 0.5rem 0rem;
 
         .btn-for-manager-sel{
             border: none;
@@ -20,9 +27,12 @@
         }
     }
     .tableMan{
-        padding-top: 2% ;
+        min-height: 100%;
+        height: fit-content;
+        padding-top: 5rem ;
         display: flex;
         justify-content: center;
+        padding-bottom: 3rem;
     }
 
 

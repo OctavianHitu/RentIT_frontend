@@ -10,6 +10,8 @@ const PasswordForm: React.FC=():JSX.Element =>{
         /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/
       );
       const {user}= useContext(LoginContext);
+
+      
       const [showPasswordAlert, setShowPasswordAlert] = useState(false);
 
     const [pass,setPass]=useState(

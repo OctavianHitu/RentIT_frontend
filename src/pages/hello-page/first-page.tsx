@@ -8,13 +8,61 @@ import Footer from "../../components/footer/footer";
 import { FormControl, MenuItem, Select } from "@mui/material";
 import { citiesRomania } from "../../assets/sass/global/enums/orase";
 import { DateRangePicker } from "@mui/x-date-pickers-pro";
+import { Reservation, ReservationContext } from "../../context/reservationContext";
+import { useNavigate } from "react-router-dom";
 
 const FirstPage: React.FC =(): JSX.Element =>{
     const [city,setCity]=useState("");
+    const [dates,setDates]=useState({begin:new Date(),end:new Date()});
+    const {cars}=useContext(CarContext);
+    const {reservations}=useContext(ReservationContext);
+    const navigate=useNavigate();
 
-    const {cars}=useContext(CarContext)
-    const lastOffers:Car[]=cars.slice(-4);
-    console.log(lastOffers)
+
+    function handleSubmitSearch(){
+
+        const carsFiltered:Car[] =cars.filter((e:Car)=>{
+             if(e.city===city){
+
+                const resdates:Date[] = [];
+
+                reservations.forEach((r:Reservation)=>{
+
+                    if(r.carId===e._id){
+                        const currentDate = new Date(r.startDate);
+                        while (currentDate <= new Date(r.endDate)) {
+                        resdates.push(new Date(currentDate));
+                        currentDate.setDate(currentDate.getDate() + 1);
+                        } 
+                    }
+
+                })
+                
+
+                let carfasd:Car|undefined=e;
+                resdates.forEach((r:Date)=>{
+                    if(new Date(dates.begin)<=new Date(r)&&new Date(r)<=new Date(dates.end)){
+                         carfasd=undefined;
+                    }
+                })
+
+                if(carfasd!=undefined){
+                    return carfasd;
+                }
+
+                if(resdates.length===0){
+                    return e;
+                }
+                
+             }
+
+
+    })
+       navigate('/offers',{state:{props:carsFiltered}})
+    }
+
+
+
     return(
         <div className="entry-page">
             <div className="row1">
@@ -28,7 +76,7 @@ const FirstPage: React.FC =(): JSX.Element =>{
                 <div className="find-car-little">
                     <div className="little-seacrh">
                         <div className="romania-txt">
-                            Romania :   
+                            Romania:   
                         </div>
 
 <div className="select-city-little">
@@ -57,10 +105,15 @@ const FirstPage: React.FC =(): JSX.Element =>{
 
               </div>
               <div className="liitle-range-picker">
-              <DateRangePicker disablePast/>
+              <DateRangePicker 
+              onChange={(newValue:any)=>{
+                setDates({...dates,begin:new Date(newValue[0]),end:new Date(newValue[1])})
+
+              }}
+              disablePast/>
               </div>
               <div className="btn-little-search">
-                <button className="btn-l-s">Search</button>
+                <button className="btn-l-s" onClick={handleSubmitSearch}>Search</button>
 
               </div>
 
@@ -105,39 +158,9 @@ const FirstPage: React.FC =(): JSX.Element =>{
 
                 
             </div>
-            <div className="row4">
-                <div className="row-last-off">
-                    <div className="hello-card-car">
-                        {/* <CarCard car={lastOffers[0]}/> */}
-                    </div>
-                    <div  className="hello-card-car">
-                    {/* <CarCard car={lastOffers[1]}/> */}
-
-                    </div>
-                </div>
-                <div className="row-last-off">
-                    <div  className="hello-card-car">
-                    {/* <CarCard car={lastOffers[2]}/> */}
-
-                    </div>
-                    <div  className="hello-card-car">
-                    {/* <CarCard car={lastOffers[3]}/> */}
-
-                    </div>
-                </div>
-
-            </div>
+            
             <div className="aboutUs">
                 
-                    {/* <Rentit fontSize={30}/>
-                
-                <div className="contact">
-                    <div>Ajutor</div>
-                    
-                    <div>Politica</div>
-                    <div>Instructiuni</div>
-
-                </div> */}
                 <Footer/>
                 
 

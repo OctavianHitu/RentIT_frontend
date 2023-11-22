@@ -35,7 +35,10 @@
       grid-template-rows: 30% 70%;
       .find-car-text{
         text-align: center;
-
+        font-family: 'Courier New', Courier, monospace;
+        color: white;
+        font-size: 1.8rem;
+        font-weight: 600;
       }
       .find-car-little{
         display: flex;
@@ -50,11 +53,14 @@
         display: flex;
         gap:10px;
         align-items: center;
+        
 
           background-color: aliceblue;
-          .romania-txt{
-            font-size: 1.5rem;
 
+          .romania-txt{
+            font-weight: 600;
+            font-size: 1.3rem;
+            font-family: 'Courier New', Courier, monospace;
           }
           .select-city-little{
             width: 20%;

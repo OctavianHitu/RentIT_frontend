@@ -31,16 +31,16 @@ const SellerPage: React.FC =():JSX.Element=>{
             <div className='seller-info-page'>
                 <div className='seller-info-fromPage'>
                     <div className='title-seller-page'>
-                        <Avatar sx={{ height: '70px !important',width:'70px !important'}} src={currentUser.avatar}/>
-                        {currentUser.userType===UserType.DEALERSHIP?(
-                            <div>{currentUser.companyName}</div>
+                        <Avatar sx={{ height: '70px !important',width:'70px !important'}} src={currentUser?.avatar}/>
+                        {currentUser?.userType===UserType.DEALERSHIP?(
+                            <div>{currentUser?.companyName}</div>
                         ):(
-                            <div>{currentUser.firstName} {currentUser.lastName}</div>
+                            <div>{currentUser?.firstName} {currentUser?.lastName}</div>
                         )}
                     </div>
                     <div className='info-seller-page'>
                         <div>
-                            {currentUser.userType===UserType.DEALERSHIP?(
+                            {currentUser?.userType===UserType.DEALERSHIP?(
                             <div>The current account is owned by a dealership!</div>
                         ):(
                             <div>The current account is owned by a person!</div>
@@ -51,35 +51,35 @@ const SellerPage: React.FC =():JSX.Element=>{
                         Email:
 
                             </div>
-                        {currentUser.email}
+                        {currentUser?.email}
                         </div>
                         <div className='seller-line-page'>
                             <div>
                             Phone number: 
                                 
                             </div>
-                        {currentUser.phoneNumber}
+                        {currentUser?.phoneNumber}
                         </div>
                         <div className='seller-line-page'>
                             <div>
                             Country: 
                                 
                             </div>
-                            {currentUser.country}
+                            {currentUser?.country}
                         </div>
                         <div className='seller-line-page'>
                             <div>
                             Adress: 
                                 
                             </div>
-                             {currentUser.city} {currentUser.address}
+                             {currentUser?.city} {currentUser?.address}
                         </div>
-                        {currentUser.userType===UserType.DEALERSHIP?(
+                        {currentUser?.userType===UserType.DEALERSHIP?(
                         <div className='seller-line-page-deal'>
                             <div>
                             Description: 
                             </div>
-                             {currentUser.description} 
+                             {currentUser?.description} 
                         </div>
 
                         ):null}

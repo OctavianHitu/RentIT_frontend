@@ -11,6 +11,8 @@ import { LoginContext } from "../../context/loginContext";
 import { UserType } from "../../assets/sass/global/Usertype";
 import { useNavigate } from "react-router-dom";
 import { GoogleMap, useLoadScript, Marker, InfoWindow } from '@react-google-maps/api'
+import ReservationModal from "../reservationModal/reservationModal";
+import { ReservationContext } from "../../context/reservationContext";
 
 
 const FullModalCar: React.FC = (): JSX.Element => {
@@ -26,7 +28,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
 
   const {users,setUsers}=useContext(UserContext);
 
-  const userOfCar= users.find((elem:User)=>{
+  const userOfCar:User= users.find((elem:User)=>{
     return elem._id===car?.owner
   })
   const {user}=useContext(LoginContext)
@@ -39,14 +41,12 @@ const FullModalCar: React.FC = (): JSX.Element => {
 
   console.log(car)
   console.log(userOfCar)
-  
-  let valuesForMap={lat:12,lng:24}
-  if(userOfCar){
-     valuesForMap={lat:userOfCar.lat,lng:userOfCar.lang}
-  }
+ 
 
 
+  const {getReservations}=useContext(ReservationContext);
   
+  const [resModal, setresModal] = useState(false);
 
 
   return (
@@ -71,7 +71,7 @@ const FullModalCar: React.FC = (): JSX.Element => {
           <div className="important-infos">
 
             <div className="important-infos-line-user" onClick={goToSeller}>
-            <Avatar src={userOfCar?.avatar}/>
+            <Avatar className="avatar-user-1" src={userOfCar?.avatar}/>
               {userOfCar?.userType===UserType.DEALERSHIP?(
                 <div>
                    {userOfCar.companyName}
@@ -99,9 +99,12 @@ const FullModalCar: React.FC = (): JSX.Element => {
             </div>
             <div className="important-infos-line-user">
             
-              {user?.id!=""?(
+              {user?.id != "" &&user?.userType==UserType.REGULAR?(
                 
-                    <button className="btn-offer-reserve">RESERVE</button>
+                    <button onClick={() => {
+                  setresModal(true);
+                }} 
+                className="btn-offer-reserve">RESERVE</button>
                 
               ):null}
             </div>
@@ -278,21 +281,64 @@ const FullModalCar: React.FC = (): JSX.Element => {
       </div>
 
       <div className="car-modal-row-3">
-        <div className="car-modal-map">
-          {userOfCar?(
-            <MapPicker
-        defaultLocation={valuesForMap}
-        apiKey='AIzaSyD07E1VvpsN_0FvsmKAj4nK9GnLq-9jtj8'
-        zoom={18}/>
-          ):null}
+      <div className="car-modal-row-3-container" onClick={goToSeller}>
 
-
+        <div className="car-modal-user-name3">
+        <Avatar  src={userOfCar?.avatar}/>
+              {userOfCar?.userType===UserType.DEALERSHIP?(
+                <div>
+                   {userOfCar?.companyName}
+                </div>
+              ):null}
+        </div>
+        <div className="car-modal-user-infos4">
+          <div className="row-car-modal-infos">
+          <div>
+            Adress:
+          </div>
+          <div>
+            {userOfCar?.country}, {userOfCar?.city}, {userOfCar?.address}
+          </div>
+          </div>
+          <div className="row-car-modal-infos">
+            <div>
+              Email:
+            </div>
+            <div>
+              {userOfCar?.email}
+            </div>
+          </div>
+          <div className="row-car-modal-infos">
+            <div>
+              Phone:
+            </div>
+            <div>
+              {userOfCar?.phoneNumber}
+            </div>
+          </div>
+          <div className="row-car-modal-infos">
+            <div>
+              Car description:
+            </div>
+            <div>
+              {car?.description}
+            </div>
+          </div>
 
             
         </div>
+        </div>
 
       </div>
-      
+      {resModal ? (
+        <ReservationModal
+          car={car}
+          onClose={() => {
+            setresModal(false);
+            getReservations();
+          }}
+        />
+      ) : null}
     </div>
   );
 };

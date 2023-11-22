@@ -21,18 +21,18 @@ import ContactUsPage from "../pages/support/contactus";
 import MyCars from "../pages/mycars/Mycars";
 import { FavouritesProvider } from "../context/favouriteContext";
 import FavouritePage from "../pages/favPage/favPage";
+import SupportPage from "../pages/supPage/support";
 const Main =()=>{
     return(
         <div className="main">
             <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <FavouritesProvider>
-                <ReservationProvideer>
+            <FavouritesProvider>
+            <ReservationProvideer>
             <LoginProvider>
             <CarProvider>
             <UserProvider>
             <Header/>
             <Routes>
-            
                 <Route 
                 path="/loginRegister"
                 element={<LoginRegister/>}
@@ -81,6 +81,9 @@ const Main =()=>{
                 <Route
                 path="/favourites"
                 element={<FavouritePage/>}/>
+                <Route
+                path="/supportPage"
+                element={<SupportPage/>}/>
             </Routes>
             </UserProvider>
             </CarProvider>

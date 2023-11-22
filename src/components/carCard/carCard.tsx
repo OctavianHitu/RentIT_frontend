@@ -26,6 +26,7 @@ const CarCard: React.FC<CarCardComponent> = (props): JSX.Element => {
   const [resModal, setresModal] = useState(false);
 
   const {favourites,getFavourites}=useContext(FavouritesContext);
+  const {getReservations}=useContext(ReservationContext);
 
   const [isFav,setIsFav]=useState(false);
 
@@ -74,11 +75,11 @@ const CarCard: React.FC<CarCardComponent> = (props): JSX.Element => {
               <CalendarTodayIcon />
               {new Date(
                 props.car.carDetails.fabricationYear
-              ).toLocaleDateString()}
+              ).getFullYear()}
             </div>
             <div className="little-info-line">
               <DirectionsCarIcon />
-              {props.car.carDetails.power} HP
+              {props.car.carDetails.doorNumber} doors
             </div>
             <div className="little-info-line">
               <LocalGasStationIcon />
@@ -95,16 +96,20 @@ const CarCard: React.FC<CarCardComponent> = (props): JSX.Element => {
             </div>
           </div>
           <div className="info-btns">
-            {user?.userType === UserType.REGULAR&&foundFav?.favOwner!=undefined&&foundFav.carId!=undefined?(
+            {user?.id != "" &&user?.userType === UserType.REGULAR?(
                 
+                foundFav?.favOwner!=undefined&&foundFav.carId!=undefined?(
                 <button onClick={deleteFavourite} className="fav-btn-car-card">
                     <FavoriteIcon fontSize="large" color="error"/>
                 </button>
-            ):(
-                <button onClick={addFavourite} className="fav-btn-car-card">
+                ):
+                (
+          <button onClick={addFavourite} className="fav-btn-car-card">
                     <FavoriteBorderIcon fontSize="large" color="error"/>
                 </button>
-            )}
+                )
+                
+            ):null}
             <button
               className="btn-offer-full"
               onClick={() => {
@@ -113,7 +118,7 @@ const CarCard: React.FC<CarCardComponent> = (props): JSX.Element => {
             >
               FULL OFFER
             </button>
-            {user?.id != "" && user?.userType === UserType.REGULAR ? (
+            {user?.id != "" && user?.userType === UserType.REGULAR&& user?.isVerified===true ? (
               <button
                 className="btn-offer-reserve"
                 onClick={() => {
@@ -131,6 +136,7 @@ const CarCard: React.FC<CarCardComponent> = (props): JSX.Element => {
           car={props.car}
           onClose={() => {
             setresModal(false);
+            getReservations();
           }}
         />
       ) : null}

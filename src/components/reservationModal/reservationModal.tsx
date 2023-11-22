@@ -2,10 +2,14 @@ import './reservationModal.scss'
 import { Car } from "../../context/carContext";
 import { DateCalendar, DatePicker } from '@mui/x-date-pickers';
 import { LoginContext } from '../../context/loginContext';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { Reservation, ReservationContext } from '../../context/reservationContext';
 import {DateRangePicker, SingleInputDateRangeField} from '@mui/x-date-pickers-pro'
 import getAxiosInstance from '../../axios-service';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import CloseIcon from '@mui/icons-material/Close';
+import { Alert } from '@mui/material';
 // import DatePicker from 'react-datepicker'
 interface ReservationModalComponent{
     car:Car;
@@ -15,9 +19,7 @@ interface ReservationModalComponent{
 const ReservationModal: React.FC<ReservationModalComponent>=(props):JSX.Element=>{
     const {user}=useContext(LoginContext);
     const {reservations,getReservations}=useContext(ReservationContext);
-
     const [error,setError]=useState(true);
-
     const [res,setRes]=useState({
 
         userId:user?.id,
@@ -28,17 +30,50 @@ const ReservationModal: React.FC<ReservationModalComponent>=(props):JSX.Element=
     })
 
     function handleReservation(){
-        getAxiosInstance().post("/reservation",res).then(props.onClose());
+        getAxiosInstance().post("/reservation",res).then(props.onClose() ,getReservations());
         
     }
 
 
+    function getAllReservedDates(){
+        const specifiedDates:Date[] = [];
+        let carRes:Reservation[]=reservations.filter((e:Reservation)=>{
+            return e.carId===props.car._id;
+        })
+        carRes.forEach((e:Reservation)=>{ 
+            const currentDate = new Date(e.startDate);
+            while (currentDate <= new Date(e.endDate)) {
+                specifiedDates.push(new Date(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        })
+        return specifiedDates;
+    }
+
+
+    const [selectedDate, setSelectedDate] = useState(new Date());
+  
+    const handleDateChange = (date:any) => {
+      setSelectedDate(date);
+    };
+  
+    //@ts-ignore
+    const tileContent = ({ date }) => {
+      if (getAllReservedDates().some((specifiedDate) => date.toDateString() === specifiedDate.toDateString())) {
+        return <div className="red-dot" />;
+      }
+      return null;
+    };
+
+    
+    console.log(getAllReservedDates())
 
     return(
-        <div className="full-res-modal">
+        <div className="full-res-modal" >
             <div className="res-modal-container">
                 <div className='top-modal-reservation'>
                     Reserve {props.car.brand} {props.car.model}
+                    <button className='btn-away-res-modal' onClick={()=>{props.onClose()}}><CloseIcon fontSize='large'/></button>
                 </div>
                 <div className='bottom-modal-reservation'>
                     <div className='date-modal-pickers'>
@@ -57,24 +92,20 @@ const ReservationModal: React.FC<ReservationModalComponent>=(props):JSX.Element=
                                 let helper:boolean=false;
 
                                 reservations.forEach((e:Reservation)=>{
-                                    console.log(e);
 
                                     if(e.carId=== props.car._id){
                                         
                                         if(new Date(e.startDate)<=new Date(newValue[0])&&new Date(newValue[0])<=new Date(e.endDate)){
                                             setError(true)
-                                            console.log("NU")
                                             helper=true
                                         }else
                                         if(new Date(e.startDate)<=new Date(newValue[1])&&new Date(newValue[1])<=new Date(e.endDate)){
                                             setError(true)
-                                            console.log("NU")
                                             helper=true
 
                                         } else
                                         if(new Date(e.startDate)>=new Date(newValue[0])&&new Date(newValue[1])>=new Date(e.endDate)){
                                             setError(true)
-                                            console.log("NU")
                                             helper=true
 
                                         }
@@ -85,7 +116,6 @@ const ReservationModal: React.FC<ReservationModalComponent>=(props):JSX.Element=
                                     
                                     
                                 })
-                                console.log(helper)
                                 if(!helper){
                                     setError(false);
                                     setRes({...res,startDate:new Date(newValue[0]),endDate:new Date(newValue[1])})
@@ -97,14 +127,22 @@ const ReservationModal: React.FC<ReservationModalComponent>=(props):JSX.Element=
                             }/>
                         </div>
                         {error?(
-                            <div>NU ESTE OK</div>
-                        ):null}
+                            <Alert severity="error" >Look at the calendar and see the free dates!</Alert>
+                        ):(
+                            <Alert severity="success">Your dates are good!</Alert>
+                        )}
                         <button disabled={error} className='modal-reserve-button' onClick={handleReservation}>Reserve</button>
                         
                     
                     </div>
                     <div className='modal-res-calendar'>
-                        <DateCalendar disabled/>
+                        {/* <DateCalendar disabled/> */}
+                        <Calendar
+        value={selectedDate}
+        onChange={handleDateChange}
+        tileContent={tileContent}
+        tileDisabled={()=>true}
+      />
                     </div>
 
                 </div>

@@ -54,12 +54,20 @@ const LoginForm:React.FC=():JSX.Element=>{
 
     function passRecovery(){
 
-      const aa= users.find((e:User)=>{if(e.email===emailRecovery){return e}})
-
+      const aa:User= users.find((e:User)=>{if(e.email===emailRecovery){return e}})
       const pass="X"+Math.random().toString(36).slice(2) + Math.random().toString(36).slice(2)+"&";
-      console.log(pass)
-      console.log(aa);
-      // getAxiosInstance().put("/user/" + aa._id, `{"password":"${pass}"}`).then(()=>{   } )
+      console.log(aa)
+      const emailObj={
+        to:aa===undefined?"":aa.email,
+        subject:"RentIT password recovery",
+        text:`Hello ${aa===undefined?"":aa.email}
+        Your new password is : ${pass} .
+        After you log into your account go to Account->Change password and change it after your preferences!`
+      }
+      getAxiosInstance().post("email",JSON.stringify(emailObj)).then(()=>[
+       getAxiosInstance().put("/user/" + aa._id, `{"password":"${pass}"}`).then(()=>{  alert("Email has been send!") } ).catch(()=>{"Can't find user!"})
+
+      ]).catch(()=>{alert("Can't find email")});
       
     }
 

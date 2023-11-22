@@ -17,7 +17,7 @@ return(
 
         </div>
         <div className='footer-selectror'>
-            <button className='btn-footer' >Support</button>
+            <button className='btn-footer' onClick={()=>{navigate('/supportPage')}}>Support</button>
             <button className='btn-footer' onClick={()=>{navigate('/infoPage')}}>Terms and conditions</button>
             <button className='btn-footer' onClick={()=>{navigate('/contactUs')}}>Contact us</button>
 

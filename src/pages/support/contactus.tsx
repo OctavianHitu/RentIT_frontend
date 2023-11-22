@@ -25,7 +25,7 @@ Phone: 0740666777
                 
             </div>
             <div>
-Alternatively, you can access the <button className='btn-suportForm'>SupportForm</button> to send us a message directly:
+Alternatively, you can access the <button style={{color:"blue",cursor:"pointer"}} onClick={()=>{navigate('/supportPage')}} className='btn-suportForm'>SupportForm</button> to send us a message directly:
                 
             </div>
             <div>
@@ -44,7 +44,7 @@ For any urgent matters or assistance related to an ongoing reservation, we recom
             </div>
             <div>
             Thank you,
-            The RentIT Team
+            The RentIT Team!
             </div>
             </div>
         </div>

@@ -25,7 +25,8 @@ export interface Car{
     _id:string;
     city:string,
     country:string,
-    address:string
+    address:string,
+    isVerified:boolean;
 }
 export interface CarDetails{
     carType:CarBody;
@@ -64,7 +65,7 @@ export const CarProvider =(props:any)=>{
     
     async function getCars() {
         const { data } = await getAxiosInstance().get("/car");
-        const carList = data;
+        const carList = data.filter((e:Car)=> e.isVerified===true);
         setCars(carList);
       }
     useEffect(() => {

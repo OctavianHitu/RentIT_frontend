@@ -156,9 +156,12 @@
     flex-direction: column;
     align-items: center;
     
+    .cerinta-oferta{
+      margin: 10px;
+    }
 
     .submit{
-        margin-top:50%;
+        margin-top:25%;
         background-color: $orange;
     }
 

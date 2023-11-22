@@ -80,7 +80,8 @@ const CarPage: React.FC = (): JSX.Element => {
     owner: user?.id,
     city:user?.city,
     country:user?.country,
-    address:user?.address
+    address:user?.address,
+    isVerified:false
   });
 
   const carsL = carList.sort(function (a, b) {
@@ -818,6 +819,9 @@ const handleClose1=(e:any,reason?:string)=>{
         <div></div>
         <div className="submit-car">
         <Alert severity="warning">Insert valid data only ! If u do not, you can risk for a fake or incorrect product on website.</Alert>
+        <div className="cerinta-oferta">
+        To have your offer appear on the website, you will need to send the relevant documents for the vehicle to <span style={{color:"blue"}}>rentit.web.company@gmail.com</span>.
+        </div>
         <div>
         <Button className="submit" variant="contained" onClick={handlesubmitCar} >ADD CAR</Button>
         </div>
